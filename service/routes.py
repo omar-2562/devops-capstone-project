@@ -113,7 +113,18 @@ def edit_account(account_id):
 # DELETE AN ACCOUNT
 ######################################################################
 
-# ... place you code here to DELETE an account ...
+@app.route("/accounts/<int:account_id>", methods=["DELETE"])
+def delete_products(account_id):
+    """
+    Delete a single Account
+    This endpoint will return a Account based on it's id
+    """
+    app.logger.info("Request to Delete a account with id [%s]", account_id)
+    account = Account.find(account_id)
+
+    if account:
+        account.delete()
+    return jsonify(""), status.HTTP_204_NO_CONTENT
 
 
 ######################################################################
