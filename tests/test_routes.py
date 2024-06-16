@@ -148,7 +148,7 @@ class TestAccountService(TestCase):
         """It should not Read an Account that is not found"""
         resp = self.client.get(f"{BASE_URL}/0")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
-    
+
     def test_update_account(self):
         """It should Update an existing Account"""
         test_account = AccountFactory()
@@ -167,7 +167,6 @@ class TestAccountService(TestCase):
     def test_delete_account(self):
         """It should Delete a Account"""
         accounts = self._create_accounts(5)
-        count = len(accounts)
         test_account = accounts[0]
         response = self.client.delete(f"{BASE_URL}/{test_account.id}")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -192,7 +191,7 @@ class TestAccountService(TestCase):
         }
         for key, value in headers.items():
             self.assertEqual(response.headers.get(key), value)
-    
+
     def test_cors_security(self):
         """It should return a CORS header"""
         response = self.client.get('/', environ_overrides=HTTPS_ENVIRON)
